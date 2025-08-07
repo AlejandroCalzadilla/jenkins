@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo 'Obteniendo código desde Git...'
+                echo 'Obteniendo código desde GitHub...'
                 git url: 'https://github.com/AlejandroCalzadilla/jenkins.git', branch: 'main'
             }
         }
