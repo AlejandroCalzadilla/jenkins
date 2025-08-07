@@ -15,7 +15,8 @@ USER jenkins
 # Instalar plugins básicos
 RUN jenkins-plugin-cli --plugins \
     git \
-    maven-integration \
+    github \
+    pipeline-maven \
     workflow-aggregator \
     pipeline-stage-view \
     build-timeout \

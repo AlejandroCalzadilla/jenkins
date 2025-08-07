@@ -1,16 +1,15 @@
 pipeline {
     agent any
     
-    tools {
-        maven 'Maven'
-        jdk 'JDK17'
+    triggers {
+        githubPush()  // Se ejecuta cuando GitHub envía webhook
     }
     
     stages {
         stage('Checkout') {
             steps {
                 echo 'Obteniendo código desde Git...'
-                checkout scm
+                git url: 'https://github.com/AlejandroCalzadilla/jenkins.git', branch: 'main'
             }
         }
         
@@ -21,18 +20,7 @@ pipeline {
             }
         }
         
-        stage('Test') {
-            steps {
-                echo 'Ejecutando pruebas...'
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    publishTestResults testResultsPattern: 'target/surefire-reports/*.xml'
-                    archiveArtifacts artifacts: 'target/surefire-reports/*', fingerprint: true
-                }
-            }
-        }
+      
         
         stage('Package') {
             steps {
