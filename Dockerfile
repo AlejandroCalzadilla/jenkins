@@ -12,6 +12,9 @@ RUN apt-get update && \
 # Volver al usuario jenkins
 USER jenkins
 
+# Deshabilitar CSRF para webhooks
+ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false -Dhudson.security.csrf.DefaultCrumbIssuer.EXCLUDE_SESSION_ID=true"
+
 # Instalar plugins básicos
 RUN jenkins-plugin-cli --plugins \
     git \
